@@ -1,0 +1,65 @@
+﻿@{
+    ViewData["Title"] = "Movies";
+}
+@model List<Movie>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<h1>@ViewData["Title"]</h1>
+<p>Welcome to the Top 10 Movies page!</p>
+
+<div class="container">
+    <form id="add-movie-form">
+        <input type="text" id="title" placeholder="Title" class="form-control mb-2" required />
+        <input type="text" id="imageUrl" placeholder="Image url" class="form-control mb-2" required />
+        <select id="category" class="form-control mb-2">
+            <option>Action</option>
+            <option>Sci-Fi</option>
+            <option>Drama</option>
+            <option>Comedy</option>
+            <option>Thriller</option>
+        </select>
+        <input type="text"
+               id="rating"
+               placeholder="Rating (1.00-10.00)"
+               class="form-control mb-2"
+               required />
+        <small class="text-danger" id="rating-error" style="display:none;">Please enter a decimal number between 1.00 and 10.00 (e.g., 5.25).</small>
+        <button type="submit" class="btn btn-primary">Add Movie</button>
+        
+    </form>
+</div>
+
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Top 10 Movies</h1>
+
+    <select id="categoryFilterField" class="form-control mb-2" style="display:inline-block; width: max-content;">
+        <option>Action</option>
+        <option>Sci-Fi</option>
+        <option>Drama</option>
+        <option>Comedy</option>
+        <option>Thriller</option>
+    </select>
+    <button id="categoryFilterButton" type="button" class="btn btn-primary" onclick="categoryFilter()" style="display:inline-block">Filter</button>
+    <div id="movies-container" class="row">
+        @foreach (var movie in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100" onclick="showCandD('@movie.Title')">
+                    <img src="@movie.ImageUrl" class="card-img-top" alt="@movie.Title">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">@movie.Title</h5>
+                        <div style="display:none;" id="CandR_@movie.Title">
+                            <p class="card-text">
+                                Rating: <strong>@movie.Rating</strong>
+                            </p>
+                            <p class="card-text">
+                                Category: @string.Join(", ", movie.Categories)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<script src="~/js/Scripts.js" asp-append-version="true"></script>
+
