@@ -1,5 +1,5 @@
 ﻿# שלב הבנייה
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
 # העתק את כל קבצי הפרויקט
@@ -21,5 +21,3 @@ EXPOSE 80
 
 # הפעל את האפליקציה
 ENTRYPOINT ["dotnet", "eWaveEllaKreiczer.dll"]
-
-COPY NuGet.Config /root/.nuget/NuGet/NuGet.Config
